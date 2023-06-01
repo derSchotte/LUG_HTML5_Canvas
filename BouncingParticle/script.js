@@ -3,9 +3,31 @@ const canvas = document.getElementById('canvas1');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+canvas.style.backgroundColor = "rgba(10, 115, 115, 1)";
+
 const ctx = canvas.getContext('2d');
 
 let particleArray = [];
+
+const distanceToParticle = 50;
+const maxParticleSize = 40;
+
+let colorArray = [ 
+    '#010221', 
+    '#b7bf99', 
+    '#edaa25', 
+    '#c43302',
+ ];
+
+let mouse = {
+    x: undefined,
+    y: undefined,
+}
+
+window.addEventListener('mousemove', function(event) {
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
 
 class Particle {
     constructor() {
@@ -24,11 +46,12 @@ class Particle {
             Mit -1.5 wird die Zahl auf -1.5 und 1.5 verschoben. */
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
+        this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
     }
 
     // Zeichnet einen Kreis und füllt ihn mit weißer Farbe
     draw() {
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -46,6 +69,20 @@ class Particle {
 
         this.x += this.speedX;
         this.y += this.speedY;
+
+        // Interaktion mit der Maus
+        if(mouse.x - this.x < distanceToParticle && 
+            mouse.x - this.x > -distanceToParticle && 
+            mouse.y - this.y < distanceToParticle && 
+            mouse.y - this.y > -distanceToParticle) {
+            if(this.size < maxParticleSize) {
+                this.size += 1;
+            } 
+
+            console.log(this.size);
+        }else if(this.size > 8) {
+            this.size -= 1;
+        }
     }
 }
 

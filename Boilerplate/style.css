@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Code', sans-serif;
+}
+
+#canvas1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #011016;
+    width: 100vw;
+    height: 100vh;
+}
