@@ -60,7 +60,7 @@ class Particle {
         context.moveTo(this.history[0].x, this.history[0].y);
 
         // Zeichne eine Linie zu allen weiteren Positionen der Historie des Particles (x, y)
-        for (let i = 0; i < this.history.length; i++) {
+        for (let i = 1; i < this.history.length; i++) {
             // Setzte den Endpunkt des Pfades auf die Position der Historie des Particles (x, y)
             context.lineTo(this.history[i].x, this.history[i].y);
         }
@@ -160,9 +160,9 @@ class Particle {
 
         // Wenn das Zurücksetzen nicht erfolgreich war, setzte das Particle an eine zufällige Position im Canvas
         if(!resetSuccessful) {
-            // Setzte die Position des Particles auf eine zufällige Position im Canvas
-            this.x = Math.floor(Math.random() * canvas.width);
-            this.y = Math.floor(Math.random() * canvas.height);
+            // Setzte das Particle an eine zufällige Position im Effekt (Canvas)
+            this.x = Math.floor(Math.random() * this.effect.width);
+            this.y = Math.floor(Math.random() * this.effect.height);
 
             // Setzte die Historie des Particles auf die aktuelle Position des Particles
             this.history = [{x: this.x, y: this.y}];
@@ -182,8 +182,8 @@ class Effect {
         this.context = ctx;
 
         // Erstelle Variablen für die Breite und Höhe des Canvas
-        this.width = canvas.width;
-        this.height = canvas.height;
+        this.width = this.canvas.width;
+        this.height = this.canvas.height;
 
         // Erstelle ein Array für die Particles
         this.particles = [];
@@ -333,7 +333,7 @@ class Effect {
     }
 
     // Erstelle Methode resize für den Effekt
-    resize() {
+    resize(width, height) {
         // Setzte die globale Breite und Höhe auf Canvas.width und height in Variablen ab
         this.canvas.width = width;
         this.canvas.height = height;
