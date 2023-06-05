@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #011016;
+}
+
+#container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#container h1 {
+    color: #a30;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+#canvas1 {
+    z-index: 1;
+    background: #022232;
+}
